@@ -96,6 +96,39 @@ server.delete('/api/users/:id', (req, res) => {
 
 // PUT REQUESTS 
 
+server.put('/api/users/:id', (req, res) => {
+    const { id } = req.params; 
+    const user = req.body; 
+    
+    db 
+    .update(id, user) 
+    .then(updated => {
+        if (updated) {
+            res.status(200)
+            .json({
+                success: true,
+                updated
+            })
+        } else {
+            res.status(404)
+            .json({
+                success: false,
+                message: "The user with the specified ID does not exist."
+            })
+        }
+    }) 
+    .catch(({ code, message }) => {
+        res.status(code)
+        .json({
+            success: false,
+            message
+        })
+    })
+})
+
+
+
+// SERVER PORT
 
 server.listen(4000, () => {
     console.log("\n *** server running on http://localhost:4000 ***\n");
