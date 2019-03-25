@@ -6,7 +6,7 @@ const server = express();
 
 server.use(express.json());
 
-
+// GET REQUESTS
 
 server.get('/', (req, res) => {
     res.send("Is this working?");
@@ -54,6 +54,7 @@ server.get('/api/users/:id', (req, res) => {
     })
 })
 
+// POST REQUESTS
 
 server.post('/api/users', (req, res) => {
     const userInfo = req.body;
@@ -74,6 +75,26 @@ server.post('/api/users', (req, res) => {
         })
 })
 
+// DELETE REQUESTS 
+
+server.delete('/api/users/:id', (req, res) => {
+    const id = req.params.id; 
+    db 
+    .remove(id)
+    .then(deleted => {
+        res.status(204);
+    }) 
+    .catch(({code, message}) => {
+        res 
+        .status(code)
+        .json({
+            success: false,
+            message
+        })
+    })
+})
+
+// PUT REQUESTS 
 
 
 server.listen(4000, () => {
