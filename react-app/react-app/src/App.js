@@ -38,12 +38,24 @@ class App extends Component {
     .catch(error => {
       console.log(error);
     })
+  } 
+
+  updateUser = (id) => {
+    axios 
+    .put(`http://localhost:4000/api/users/${id}`)
+    .then(res => {
+      this.setState({
+        name: res.data.name, 
+        bio: res.data.bio 
+      })
+    })
   }
 
   render() {
     return (
       <div className="App">
-        <Users deleteUser={this.deleteUser} users={this.state.users} /> 
+        <Users deleteUser={this.deleteUser} 
+        updateUser={this.updateUser} users={this.state.users} /> 
         <NewUser />
       </div>
     );
