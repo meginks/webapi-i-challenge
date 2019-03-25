@@ -57,9 +57,8 @@ server.get('/api/users/:id', (req, res) => {
 
 server.post('/api/users', (req, res) => {
     const userInfo = req.body;
-
-    db.users 
-        .add(userInfo)
+    db
+        .insert(userInfo)
         .then( user => {
             res 
             .status(201)
