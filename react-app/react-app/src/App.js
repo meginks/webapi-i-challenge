@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import Users from './components/Users';
-
+import NewUser from './components/NewUser'; 
 
 
 
@@ -43,7 +43,8 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Users deleteUser={this.deleteUser} users={this.state.users} />
+        <Users deleteUser={this.deleteUser} users={this.state.users} /> 
+        <NewUser />
       </div>
     );
   }
