@@ -27,11 +27,23 @@ class App extends Component {
       console.log(error))
   }
 
+  deleteUser = (id) => {
+    axios 
+    .delete(`http://localhost:4000/api/users/${id}`)
+    .then(res => {
+      this.setState({
+        users: res.data
+      })
+    })
+    .catch(error => {
+      console.log(error);
+    })
+  }
 
   render() {
     return (
       <div className="App">
-        <Users users={this.state.users} />
+        <Users deleteUser={this.deleteUser} users={this.state.users} />
       </div>
     );
   }
