@@ -66,7 +66,10 @@ server.get('/api/users/:id', (req, res) => {
 
 server.post('/api/users', (req, res) => {
     const userInfo = req.body; 
-    checkReqBody(userInfo, res);
+    if (!userInfo.name || !userInfo.bio) {
+         checkReqBody(res);
+         } 
+    else {
     db
         .insert(userInfo)
         .then( user => {
@@ -82,6 +85,7 @@ server.post('/api/users', (req, res) => {
             message: "There was an error while saving the user to the database."
         })
         })
+    }
 })
 
 // DELETE REQUESTS 
@@ -110,7 +114,10 @@ server.put('/api/users/:id', (req, res) => {
     const { id } = req.params; 
     const user = req.body; 
     checkID(id); 
-    checkReqBody(user, res);
+    if (!userInfo.name || !userInfo.bio) {
+        checkReqBody(res);
+        } 
+   else {
     db 
     .update(id, user) 
     .then(updated => {
@@ -135,7 +142,8 @@ server.put('/api/users/:id', (req, res) => {
             success: false,
             message: "The information could not be modified"
         })
-    })
+    }) 
+}
 })
 
 
