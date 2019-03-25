@@ -23,6 +23,35 @@ server.get('/api/users', (req, res) => {
     .catch( ({ code, message }) => {
         res.status(code).json({ success: false, message })
     })
+}) 
+
+server.get('/api/users/:id', (req, res) => {
+    const id = req.params.id;
+    db
+    .findById(id) 
+    .then( id => {
+        if (id) {
+            res.status(200)
+            .json({
+                success: true, 
+                id
+            })
+        } else {
+            res.status(404) 
+            .json({
+                success: false,
+                message: "Sorry, we could not find that user."
+            })
+        }
+    })
+    .catch (({ code, message }) => {
+        res 
+        .status(code)
+        .json({ 
+            success: false,
+            message
+        })
+    })
 })
 
 
