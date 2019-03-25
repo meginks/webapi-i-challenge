@@ -114,7 +114,7 @@ server.put('/api/users/:id', (req, res) => {
     const { id } = req.params; 
     const user = req.body; 
     checkID(id); 
-    if (!userInfo.name || !userInfo.bio) {
+    if (!user.name || !user.bio) {
         checkReqBody(res);
         } 
    else {
