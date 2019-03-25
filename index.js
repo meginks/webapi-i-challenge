@@ -5,7 +5,7 @@ const db = require('./data/db.js');
 const server = express();
 
 server.use(express.json());
-
+server.use(cors()); 
 
 // helper functions 
 const { checkID, checkReqBody }= require('./helper-functions.js');
